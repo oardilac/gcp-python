@@ -4,12 +4,18 @@ ENV PYTHONUNBUFFERED True
 
 WORKDIR /app
 
+# Copy requirements.txt and install dependencies
 COPY requirements.txt /app/
-
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Collect static files
+# Copy only specific directories and files
+COPY app /app/app
+COPY gcp /app/gcp
+COPY manage.py /app/
+
+# Run Django-specific commands
+RUN python manage.py migrate
 RUN python manage.py collectstatic --no-input
 
 # Expose port
