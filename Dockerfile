@@ -1,7 +1,10 @@
+# Use an official Python runtime as a parent image
 FROM python:3.9-buster
 
+# Set environment varibles
 ENV PYTHONUNBUFFERED True
 
+# Set working directory
 WORKDIR /app
 
 # Copy requirements.txt and install dependencies
@@ -20,6 +23,9 @@ RUN mkdir -p /app/staticfiles
 # Run Django-specific commands
 RUN python manage.py migrate
 RUN python manage.py collectstatic --no-input
+
+# Check static files
+RUN ls -l /app/staticfiles
 
 # Expose port
 EXPOSE 8000
