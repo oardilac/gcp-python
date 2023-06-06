@@ -14,6 +14,9 @@ COPY app /app/app
 COPY gcp /app/gcp
 COPY manage.py /app/
 
+# Create static files directory
+RUN mkdir -p /app/staticfiles
+
 # Run Django-specific commands
 RUN python manage.py migrate
 RUN python manage.py collectstatic --no-input
