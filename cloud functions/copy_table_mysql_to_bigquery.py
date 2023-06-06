@@ -3,30 +3,32 @@ import pandas as pd
 import mysql
 from google.cloud import bigquery
 from google.cloud.exceptions import NotFound
+import mysql.connector as connection
+
 
 def get_engine():
-    db_config = mysql.connector.connect(
-        user="",
-        password="",
-        host="",
-        database=""
-    )
-    
+    db_config = mysql.connector.connect(user="", password="", host="", database="")
+
     return db_config
 
 
 def copy_table_mysql_to_bigquery(request):
-    table_source = request.args['table_source']
-    table_destination = request.args['table_destination']
+    table_source = request.args["table_source"]
+    table_destination = request.args["table_destination"]
     project_id = ""
     schema = ""
-    table_id =  '{0}.{1}.{2}'.format(project_id, schema, table_destination)
+    table_id = "{0}.{1}.{2}".format(project_id, schema, table_destination)
 
+    headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
+    
     if table_source.strip() == "" or table_destination.strip() == "":
-        return json.dumps({'result': 'error', 'description': 'no table name'})
+        return json.dumps({"result": "error", "description": "no table name"})
 
     engine = get_engine()
-    query = 'SELECT * FROM {0}'.format(table_source)
+    query = "SELECT * FROM {0}".format(table_source)
     result_dataframe = pd.read_sql(query, engine)
 
     client = bigquery.Client()
@@ -43,6 +45,6 @@ def copy_table_mysql_to_bigquery(request):
     try:
         client.get_table(table_id)
     except NotFound:
-        return json.dumps({'result': 'error', 'description': 'table not found'})
+        return json.dumps({"result": "error", "description": "table not found"})
 
-    return json.dumps({'result': 'ok'})
+    return json.dumps({"result": "ok"})
