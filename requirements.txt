@@ -40,7 +40,6 @@ pickleshare==0.7.5
 platformdirs==3.5.1
 prompt-toolkit==3.0.38
 proto-plus==1.22.2
-protobuf==3.20.3
 psutil==5.9.5
 pure-eval==0.2.2
 pyarrow==12.0.0
