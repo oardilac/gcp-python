@@ -24,9 +24,6 @@ RUN mkdir -p /app/staticfiles
 RUN python manage.py migrate
 RUN python manage.py collectstatic --no-input
 
-# Check static files
-RUN ls -l /app/staticfiles
-
 # Expose port
 EXPOSE 8000
 
