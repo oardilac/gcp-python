@@ -46,6 +46,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://gcp-python-ywtk7siozq-wn.a.run.app:8000"
 ]
 
 ROOT_URLCONF = "gcp.urls"
@@ -114,8 +115,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/run/static'),]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static'),]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
