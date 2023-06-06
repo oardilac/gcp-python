@@ -21,7 +21,6 @@ google-resumable-media
 googleapis-common-protos
 greenlet
 grpcio
-grpcio-status
 gunicorn
 idna
 ipykernel
