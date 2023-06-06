@@ -47,7 +47,6 @@ pyasn1-modules
 Pygments
 python-dateutil
 pytz
-pywin32
 pyzmq
 requests
 rsa
